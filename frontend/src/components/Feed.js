@@ -39,15 +39,21 @@ export default function Feed() {
 
   const handleImgUpload = async () => {
     try {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('file', image.data);
-
-      const response = await axios.post(`${API_BASE_URL}/uploadFile`, formData);
+  
+      const response = await axios.post(`${API_BASE_URL}/uploadFile`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
       return response;
     } catch (error) {
       console.error('Error uploading image:', error);
     }
   };
+  
 
   const addPost = async () => {
     if (image.preview === '') {
@@ -72,10 +78,11 @@ export default function Feed() {
         const request = {
           description: caption,
           location: location,
-          image: `${API_BASE_URL}/files/${imgRes.data.fileName}`,
+          image: imgRes.data.publicUrl,
         };
         const postResponse = await axios.post(`${API_BASE_URL}/createpost`, request, CONFIG_OBJ);
         setLoading(false);
+        
 
         if (postResponse.status === 201) {
           // Show a success message using SweetAlert

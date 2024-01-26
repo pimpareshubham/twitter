@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "dauntless-water-412305",
+  "private_key_id": "78c2e152110fda1ad2c602f3a0a11ccf2ca8be03",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCpFW3d6a0gG5+K\nnyHEo13bgedhO7nr+O0EH7+PKzMLngNSLKjXL0/ACzCnqYRtG65BwVJUQIHmIy/x\n8hQAD53kS8eoOIZRbweDCkh/X9cmLr3mJ40Z0aBMJdbn6GvPoI5jpb0pyYU42pD0\nblzCuEqSX/HidfsVUMSrEhGneoOiTpFKmKvF87yr+ljyDv4eqL8pN8unU73fg+xT\noYDm8bBajrPFcFTUqvkTY8lcsGFQSrVq/SSVtgcJcClFXySCBy8Ofh4JARj+87Jg\no1N756aW6QCWanC/QM3/8FnqNuplaPaokkhzZJLxHhEafdAAZ/BIp68EV1iIbDsX\na0fAg3thAgMBAAECggEALfFgLoWxoIFQ+vodU1Bujtf/1mhDrw4u3MmBo/XBg30W\neuwenoXA/jYsLMp/bKQyV7SfWbxDb5SNEQlNjOyxYtiCcj+Vo6fvGxietVmF3N6j\ng9eoW+UdUMORXudE8CA4wHPG8AVNWTLuYzRfqRspTBec4oNbS6HsJm2c9WxxOxb7\nUIPEdbG1v7xVVY3NEwOnMfH4h9W9TfbbZ6YenvjjhYa2AWKBFr9GZLqmMtFMQFet\nkJDfReoQdwlqrWRWs3upDB1h/sNLHK0rABK7D4sNesj3/sebdrgjtwtVE1p2pCZM\nlr8B7TZ5V7HapJlm5Wkq1kAg/NjATrQ6Z/lDPQxi3wKBgQDpIgULp8YSm39jqCGm\nSTKzOQkgsm7qgNEPgtcdBi/l9RMW9gk24nFOmRUVMDsTTbrvbuRnoR9l01K9Q4yW\npUi0TWY9XMMukxXGDyPdnF6GYKqCC8WD+8hMKiCb/RdTjomaFLmeZT31FcDGA9lF\nx+ksOzKScrIwpJh6tz3QyScBXwKBgQC5qyF849/MNxt6q6yvc2gVpdPRuWUhD9gc\n0TqMLCbPg/a4fV3AXLtHEWJDao/8S4VJlgVgQU0Gyl5nxrGjmBf4LjySGVC6fDGn\nRGI5mRd/dHp5V1IQw3KbVeS6pVf4ydHqqz3pZllMXUNIR1OIC6B7KREm7zF8Df+g\nFZmPza77PwKBgHBXmXDVZ0h+MDP4yEZWTZ055eEguvw8GQJNfZWZ7qj0oT9WTnhp\nREqo0BUGyeDyext4J46cgQHThLJ5g5zwhwmDprn5IoEmFb78er8G5DIDEQdb3tFM\nGmhBgLdKjdwQ+tQKGqxugx3AXsXNAv1yaTWMTUFvDdkM6AFyndInrKknAoGAORxx\nxZfWnFuLIVWzXZizOI10tXtAp0XXZS3aw4lFOunNt3wgnW4o0TiAsFoUBjg4vKTf\n7HbJucAAAA33UGoVXWrjiNEuqt5O67O2Px9fQf5TOgXpIWztUOi/3cXEZKu33WZl\nOekYqMu7SX1fLWbeK2Q7eW10HEO2EMj0Hm7XV0MCgYAY3XGm8RdM8RkxO12d4UWU\nC+eUWxikLfvXInHPTo19JYjbevwCpgeqH81e1vhdYAaRUWb/1Mrd8flVJ5asBYG3\nT7aSxzCHS6TGAHnyTNqeuqYIZxkEwtyBetPaTZnRIYnRxVbj6OrAbUspOSLShlkK\nHj5BcCAmLTNp1L2jyV/XQA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "shubhamstoragesa@dauntless-water-412305.iam.gserviceaccount.com",
+  "client_id": "102807329605546053349",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/shubhamstoragesa%40dauntless-water-412305.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
