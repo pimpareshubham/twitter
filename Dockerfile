@@ -2,7 +2,7 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY . .
+COPY backend/. .
 
 RUN npm install
 
