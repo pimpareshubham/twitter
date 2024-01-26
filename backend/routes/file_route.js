@@ -4,32 +4,58 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const UserModel = mongoose.model("UserModel");
 const protectedRoute = require("../middleware/protectedResource");
+const { Storage } = require('@google-cloud/storage');
+const path = require('path');
+const fs = require('fs');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
 
-const upload = multer({
-    storage: storage,
-   
-    fileFilter: (req, file, cb) => {
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/webp") {
-            cb(null, true);
-        } else {
-            cb(null, false);
-            return res.status(400).json({ error: "File types allowed are .jpeg, .png, .jpg" });
+
+const storage = new Storage({
+    keyFilename: path.join(__dirname, '../storageACKey/sakey.json'), // Update with the correct path
+    projectId: 'dauntless-water-412305', // Replace with your project ID
+});
+
+const bucketName = 'shubhamspstorage'; // replace with your bucket name
+const bucket = storage.bucket(bucketName);
+
+const upload = multer({ dest: 'uploads/' });
+
+
+router.post("/uploadFile", upload.single('file'), async function (req, res) {
+    try {
+        console.log("inside /uploadFile")
+        if (!req.file) {
+            console.log("not file")
+            return res.status(400).json({ error: 'No file uploaded' });
         }
+
+        const fileName = req.file.originalname;  // Use originalname to get the file name with extension
+        const localFilePath = req.file.path;
+
+        console.log(fileName)
+
+        // Upload the file to Google Cloud Storage
+        await bucket.upload(localFilePath, {
+            destination: fileName,
+        });
+
+        // Delete the local file after uploading to GCS
+        fs.unlinkSync(localFilePath);
+
+        // Get the public URL of the uploaded file
+        const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
+
+        // Send the public URL in the response
+        console.log(publicUrl)
+        res.status(201).json({ "fileName": fileName, "publicUrl": publicUrl });
+    } catch (error) {
+        console.error('Error uploading file to Google Cloud Storage:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-router.post("/uploadFile", upload.single('file'), function (req, res) {
-    res.json({ "fileName": req.file.filename });
-});
+
+
 
 router.post("/updateProfileDetails", protectedRoute, upload.single('file'), async (req, res) => {
     try {

@@ -2,8 +2,17 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 const PostModel = mongoose.model("PostModel");
+const path = require('path');
 const UserModel = mongoose.model("UserModel");
 const protectedRoute = require("../middleware/protectedResource");
+
+const { Storage } = require('@google-cloud/storage');
+
+const storage = new Storage({
+    keyFilename: path.join(__dirname, '../storageACKey/sakey.json'), // Update with the correct path
+    projectId: 'dauntless-water-412305', // Replace with your project ID
+  });
+  const bucket = storage.bucket('shubhamspstorage');
 
 
 //all users posts
@@ -33,8 +42,10 @@ router.get("/myallposts", protectedRoute, (req, res) => {
 });
 
 router.post("/createpost", protectedRoute, async (req, res) => {
+    console.log("inside /createpost")
     const { description, location, image } = req.body;
     if (!description || !location || !image) {
+        console.log("One or more mandatory fields are empty")
         return res.status(400).json({ error: "One or more mandatory fields are empty" });
     }
 
@@ -43,6 +54,7 @@ router.post("/createpost", protectedRoute, async (req, res) => {
 
     try {
         const newPost = await postObj.save();
+        console.log("inside newPost")
 
         // Associate the post with the user and update the user's posts array
         const user = await UserModel.findById(req.user._id);
@@ -57,25 +69,39 @@ router.post("/createpost", protectedRoute, async (req, res) => {
 });
 
 
-router.delete("/deletepost/:postId", protectedRoute, (req, res) => {
-    PostModel.findOne({ _id: req.params.postId })
-        .populate("author", "_id")
-        .exec((error, postFound) => {
-            if (error || !postFound) {
-                return res.status(400).json({ error: "Post does not exist" });
-            }
-            //check if the post author is same as loggedin user only then allow deletion
-            if (postFound.author._id.toString() === req.user._id.toString()) {
-                postFound.remove()
-                    .then((data) => {
-                        res.status(200).json({ result: data });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-            }
-        })
+
+
+
+
+router.delete("/deletepost/:postId", protectedRoute, async (req, res) => {
+    try {
+        const post = await PostModel.findOne({ _id: req.params.postId }).populate("author", "_id");
+        if (!post) {
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        // Check if the post author is the same as the logged-in user
+        if (post.author._id.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ error: "Unauthorized to delete this post" });
+        }
+
+        // Extract the file name from the full URL
+        const fileName = path.basename(post.image); // Assuming `image` is the full URL
+
+        // Delete the file from Google Cloud Storage
+        await bucket.file(fileName).delete();
+
+        // Remove the post from the database
+        await post.remove();
+
+        res.status(200).json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "An error occurred while deleting the post" });
+    }
 });
+
+
 
 router.put("/like", protectedRoute, (req, res) => {
     PostModel.findByIdAndUpdate(req.body.postId, {
