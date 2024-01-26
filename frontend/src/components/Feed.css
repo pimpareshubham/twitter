@@ -1,0 +1,16 @@
+.feed-body {
+    margin-left: 30vw;
+  
+}
+
+.scrollable-content {
+    overflow-y: auto;
+    height: 85vh; /* Adjust the height as needed */
+  }
+
+@media (max-width: 900px) {
+    .feed-body {
+        margin-left: 35vw;
+        width: 61vw;
+    }
+}
