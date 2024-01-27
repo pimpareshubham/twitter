@@ -180,10 +180,15 @@ const Profile = () => {
 
   const handleImgUpload = async () => {
     try {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('file', image.data);
-
-      const response = await axios.post(`${API_BASE_URL}/uploadFile`, formData);
+  
+      const response = await axios.post(`${API_BASE_URL}/uploadFile`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
       return response;
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -239,13 +244,23 @@ const Profile = () => {
         const request = {
           description: caption,
           location: location,
-          image: `${API_BASE_URL}/files/${imgRes.data.fileName}`,
+          image: imgRes.data.publicUrl,
         };
         const postResponse = await axios.post(`${API_BASE_URL}/createpost`, request, CONFIG_OBJ);
         setLoading(false);
+        
 
         if (postResponse.status === 201) {
-          navigate('/home');
+          // Show a success message using SweetAlert
+          Swal.fire({
+            icon: 'success',
+            title: 'Post uploaded successfully!',
+          }).then(() => {
+            navigate('/home');
+          });
+          setShow(false)
+          getAllPosts();
+
         } else {
           Swal.fire({
             icon: 'error',
@@ -269,7 +284,7 @@ const Profile = () => {
           <img
             className="p-2 profile-pic img-fluid"
             alt="profile pic"
-            src={userProfile.profileImg}
+            src={userProfile.profileImageUrl}
 
 
           />
@@ -313,7 +328,7 @@ const Profile = () => {
               <div className="card-body px-2">
                 <div className='row'>
                   <div className='col-6 d-flex'>
-                    <img className='p-2 post-profile-pic' alt="profile pic" src={`${API_BASE_URL}/files/${userProfile.profileImg}`} />
+                    <img className='p-2 post-profile-pic' alt="profile pic" src={userProfile.profileImageUrl} />
                     <div className='mt-2'>
                       <p className='fs-6 fw-bold'>{post.author.fullName}</p>
                       <p className='location'>{post.location}</p>
