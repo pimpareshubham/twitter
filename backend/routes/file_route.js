@@ -61,9 +61,13 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
     try {
         const user = await UserModel.findById(req.user._id);
 
-        // Delete old profile picture if exists
+        // Delete old profile picture if exists in Google Cloud Storage
         if (user.profileImg) {
-            // You might want to delete the old file from the server, e.g., using fs.unlinkSync
+            try {
+                await bucket.file(user.profileImg).delete();
+            } catch (deleteError) {
+                console.error('Error deleting old profile picture:', deleteError);
+            }
         }
 
         // Check if a new profile picture is provided
@@ -85,6 +89,7 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
 
 
 const downloadFile = (req, res) => {
