@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://twitter-be-tbhddbpqaq-uc.a.run.app";
+export const API_BASE_URL = "https://twitter-tbhddbpqaq-uc.a.run.app";
