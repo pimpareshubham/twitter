@@ -15,7 +15,7 @@ export default function Home() {
       <Sidebar />
       <Feed />
       <button
-        className="btn btn-primary d-block d-md-none"
+        className="btn btn-primary d-none d-md-block btn-toggle-sidebar"
         onClick={toggleSidebar}
       >
         Toggle Sidebar
