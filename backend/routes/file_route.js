@@ -60,8 +60,7 @@ router.post("/uploadFile", upload.single('file'), async function (req, res) {
 
 router.post("/updateProfileDetails", protectedRoute, upload.single('file'), async (req, res) => {
     try {
-
-        console.log("inside /updateProfileDetails")
+        console.log("inside /updateProfileDetails");
         const user = await UserModel.findById(req.user._id);
 
         // Delete old profile picture if exists in Google Cloud Storage
@@ -75,12 +74,13 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
 
         // Check if a new profile picture is provided
         if (req.file) {
-            // Upload the file directly to GCS without saving it locally
+            // Use originalname to get the file name with extension
             const fileName = req.file.originalname;
-            const fileBuffer = req.file.buffer;
+            const localFilePath = req.file.path;
 
-            await bucket.file(fileName).save(fileBuffer, {
-                contentType: req.file.mimetype,
+            // Upload the file to Google Cloud Storage
+            await bucket.upload(localFilePath, {
+                destination: fileName,
             });
 
             // Get the public URL of the uploaded file
@@ -100,7 +100,6 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
         res.status(201).json({ 
             message: "Profile information updated successfully", 
             profileImg: user.profileImg
-        
         });
     } catch (error) {
         console.error(error);
