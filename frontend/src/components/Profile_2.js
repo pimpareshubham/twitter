@@ -236,7 +236,7 @@ const ModifiedProfile = () => {
                     <img
                       className="p-2 post-profile-pic"
                       alt="profile pic"
-                      src={`${API_BASE_URL}/files/${userProfile.profileImageUrl}`}
+                      src={userProfile.profileImageUrl}
                     />
                     <div className="mt-2">
                       <p className="fs-6 fw-bold">{post.author.fullName}</p>
