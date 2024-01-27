@@ -18,7 +18,14 @@ mongoose.connection.on('error', (error) => {
 require('./models/user_model');
 require('./models/post_model');
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://twitter-fe-delta.vercel.app"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true
+  }
+));
+
 app.use(express.json());
 
 app.use(require('./routes/user_route'));
