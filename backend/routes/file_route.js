@@ -96,8 +96,8 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
 
         res.json({ 
             message: "Profile information updated successfully", 
-            profileImg: user.profileImg,
-            profileImgUrl: user.profileImgUrl
+            profileImg: user.profileImg
+        
         });
     } catch (error) {
         console.error(error);
