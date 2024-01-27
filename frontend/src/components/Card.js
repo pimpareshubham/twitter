@@ -78,7 +78,7 @@ const Card = (props) => {
                 <img
                     className='p-2 post-profile-pic'
                     alt='profile pic'
-                    src={`${API_BASE_URL}/files/${props.postData.author.profileImg}`}
+                    src={props.postData.author.profileImg}
                 />
                 <div className='mt-2'>
                 <Link  className="profile-link fw-bold" to={`/profilePage_2/${props.postData.author._id}`}>{props.postData.author.fullName}</Link>
