@@ -21,52 +21,36 @@ const bucket = storage.bucket(bucketName);
 const upload = multer({ dest: 'uploads/' });
 
 
-router.post("/updateProfileDetails", protectedRoute, upload.single('file'), async (req, res) => {
+router.post("/uploadFile", upload.single('file'), async function (req, res) {
     try {
-        console.log("inside /updateProfileDetails");
-        const user = await UserModel.findById(req.user._id);
-
-        // Delete old profile picture if exists in Google Cloud Storage
-        if (user.profileImg) {
-            try {
-                await bucket.file(user.profileImg).delete();
-            } catch (deleteError) {
-                console.error('Error deleting old profile picture:', deleteError);
-            }
+        console.log("inside /uploadFile")
+        if (!req.file) {
+            console.log("not file")
+            return res.status(400).json({ error: 'No file uploaded' });
         }
 
-        // Check if a new profile picture is provided
-        if (req.file) {
-            // Use originalname to get the file name with extension
-            const fileName = req.file.originalname;
-            const localFilePath = req.file.path;
+        const fileName = req.file.originalname;  // Use originalname to get the file name with extension
+        const localFilePath = req.file.path;
 
-            // Upload the file to Google Cloud Storage
-            await bucket.upload(localFilePath, {
-                destination: fileName,
-            });
+        console.log(fileName)
 
-            // Get the public URL of the uploaded file
-            const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
-
-            // Update user's profile picture field with the new filename and public URL
-            user.profileImg = publicUrl;
-        }
-
-        // Update other user information
-        user.fullName = req.body.fullName || user.fullName;
-        user.email = req.body.email || user.email;
-        user.description = req.body.description || user.description;
-
-        await user.save();
-
-        res.status(201).json({ 
-            message: "Profile information updated successfully", 
-            profileImg: user.profileImg
+        // Upload the file to Google Cloud Storage
+        await bucket.upload(localFilePath, {
+            destination: fileName,
         });
+
+        // Delete the local file after uploading to GCS
+        fs.unlinkSync(localFilePath);
+
+        // Get the public URL of the uploaded file
+        const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
+
+        // Send the public URL in the response
+        console.log(publicUrl)
+        res.status(201).json({ "fileName": fileName, "publicUrl": publicUrl });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error('Error uploading file to Google Cloud Storage:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
