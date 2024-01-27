@@ -189,7 +189,7 @@ const ModifiedProfile = () => {
           <img
             className="p-2 profile-pic img-fluid"
             alt="profile pic"
-            src={`${API_BASE_URL}/files/${userProfile.profileImg}`}
+            src={userProfile.profileImageUrl}
           />
           <p className="ms-3 fs-5 fw-bold">{userProfile.fullName}</p>
           <p className="ms-3 fs-5">{userProfile.email}</p>
@@ -236,7 +236,7 @@ const ModifiedProfile = () => {
                     <img
                       className="p-2 post-profile-pic"
                       alt="profile pic"
-                      src={`${API_BASE_URL}/files/${userProfile.profileImg}`}
+                      src={`${API_BASE_URL}/files/${userProfile.profileImageUrl}`}
                     />
                     <div className="mt-2">
                       <p className="fs-6 fw-bold">{post.author.fullName}</p>
