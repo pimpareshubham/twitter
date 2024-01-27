@@ -1,0 +1,12 @@
+.d-flex.toggled .sidebar {
+  display: none;
+}
+
+.d-flex.toggled .feed {
+  width: 100%;
+}
+
+/* Customize the transition duration as needed */
+.d-flex {
+  transition: all 0.3s;
+}
