@@ -1,4 +1,4 @@
 module.exports = {
-    MONGODB_URL: "mongodb://127.0.0.1:27017/Twitter_clone",
+    MONGODB_URL : "mongodb+srv://dbuser:dbuser@serverlessinstance0.fabfzys.mongodb.net/?retryWrites=true&w=majority",
     JWT_SECRET: "dwhekfjejhefhjgksj"
 };
