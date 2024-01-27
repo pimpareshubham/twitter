@@ -72,8 +72,19 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
 
         // Check if a new profile picture is provided
         if (req.file) {
-            // Update user's profile picture field with the new filename
-            user.profileImg = req.file.filename;
+            // Upload the file directly to GCS without saving it locally
+            const fileName = req.file.originalname;
+            const fileBuffer = req.file.buffer;
+
+            await bucket.file(fileName).save(fileBuffer, {
+                contentType: req.file.mimetype,
+            });
+
+            // Get the public URL of the uploaded file
+            const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
+
+            // Update user's profile picture field with the new filename and public URL
+            user.profileImg = publicUrl;
         }
 
         // Update other user information
@@ -83,13 +94,16 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
 
         await user.save();
 
-        res.json({ message: "Profile information updated successfully", profileImg: user.profileImg });
+        res.json({ 
+            message: "Profile information updated successfully", 
+            profileImg: user.profileImg,
+            profileImgUrl: user.profileImgUrl
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
-
 
 
 const downloadFile = (req, res) => {
