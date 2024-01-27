@@ -1,16 +1,15 @@
 .feed-body {
-    margin-left: 30vw;
-  
+  margin-left: 30vw;
 }
 
 .scrollable-content {
-    overflow-y: auto;
-    height: 85vh; /* Adjust the height as needed */
-  }
+  overflow-y: auto;
+  height: 100vh; /* Adjust the height as needed */
+}
 
 @media (max-width: 900px) {
-    .feed-body {
-        margin-left: 35vw;
-        width: 61vw;
-    }
+  .feed-body {
+    margin-left: 0; /* No margin on smaller screens */
+    width: 100%; /* Full width on smaller screens */
+  }
 }
