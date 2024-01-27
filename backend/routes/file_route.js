@@ -59,6 +59,8 @@ router.post("/uploadFile", upload.single('file'), async function (req, res) {
 
 router.post("/updateProfileDetails", protectedRoute, upload.single('file'), async (req, res) => {
     try {
+
+        console.log("inside /updateProfileDetails")
         const user = await UserModel.findById(req.user._id);
 
         // Delete old profile picture if exists in Google Cloud Storage
@@ -94,7 +96,7 @@ router.post("/updateProfileDetails", protectedRoute, upload.single('file'), asyn
 
         await user.save();
 
-        res.json({ 
+        res.status(201).json({ 
             message: "Profile information updated successfully", 
             profileImg: user.profileImg
         
