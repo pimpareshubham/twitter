@@ -269,7 +269,7 @@ const Profile = () => {
           <img
             className="p-2 profile-pic img-fluid"
             alt="profile pic"
-            src={userProfile.profileImg}
+            src={userProfile.profileImageUrl}
 
 
           />
@@ -313,7 +313,7 @@ const Profile = () => {
               <div className="card-body px-2">
                 <div className='row'>
                   <div className='col-6 d-flex'>
-                    <img className='p-2 post-profile-pic' alt="profile pic" src={userProfile.profileImg} />
+                    <img className='p-2 post-profile-pic' alt="profile pic" src={userProfile.profileImageUrl} />
                     <div className='mt-2'>
                       <p className='fs-6 fw-bold'>{post.author.fullName}</p>
                       <p className='location'>{post.location}</p>
