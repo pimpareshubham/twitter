@@ -1,11 +1,7 @@
 FROM node:16-alpine
-
-WORKDIR /app
-
-COPY . .
-
-RUN npm install
-
+RUN mkdir node
+COPY . ./node
+WORKDIR /node
+RUN npm install 
 EXPOSE 5000
-
 CMD node server.js
