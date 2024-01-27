@@ -259,7 +259,7 @@ const Profile = () => {
             navigate('/home');
           });
           setShow(false)
-          getAllPosts();
+          getMyPosts();
 
         } else {
           Swal.fire({
