@@ -20,7 +20,7 @@ require('./models/post_model');
 
 app.use(cors(
   {
-    origin: ["https://twitter-fe-delta.vercel.app"],
+    origin: ["https://twitter-fe-tbhddbpqaq-uc.a.run.app"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
   }
