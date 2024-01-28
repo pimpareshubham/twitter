@@ -29,21 +29,14 @@
 }
 
 @media only screen and (max-width: 568px) {
-    .login-body {
-        height: min-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+   
     
     .login-card-body {
         border: none !important;
-        width: 100vw;
+        min-height: 100vh;
+        width: max-content;
         
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    
+        box-sizing: border-box;
     }
     
 
@@ -52,5 +45,9 @@
   .my-3 {
     margin-top: 0rem!important;
     margin-bottom: 0!important;
+}
+
+.container{
+    --bs-gutter-x: 0;
 }
   
