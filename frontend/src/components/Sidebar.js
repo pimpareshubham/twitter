@@ -15,36 +15,37 @@ export default function Sidebar() {
     });
     const [loading, setLoading] = useState(true);
 
-    const CONFIG_OBJ = {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-    };
-
-    const getUserDetails = async () => {
-        try {
-            if (user.user._id) {
-                const response = await axios.get(`${API_BASE_URL}/userDetails/${user.user._id}`, CONFIG_OBJ);
-                setUserDetails(response.data.userDetails);
-                setLoading(false);
-            }
-        } catch (error) {
-            console.error('Error fetching user details:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Failed to fetch user details',
-            });
-        }
-    };
+    
 
     useEffect(() => {
-        getUserDetails();
-    }, []);
+
+        const CONFIG_OBJ = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+        };
+        const getUserDetails = async () => {
+            try {
+                if (user.user._id) {
+                    const response = await axios.get(`${API_BASE_URL}/userDetails/${user.user._id}`, CONFIG_OBJ);
+                    setUserDetails(response.data.userDetails);
+                    setLoading(false);
+                }
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to fetch user details',
+                });
+            }
+        };
+        getUserDetails()
+    }, [user]);
 
     return (
         <div className="sidebar-body sidebar">
-            <img src={logo} height={'70vh'} className="ms-3 logo" alt="Logo" />
+            <img src={logo} height={'60vh'} className="ms-3 logo" alt="Logo" />
             <div className="d-flex flex-column mt-3 ms-4 menu">
                 <NavLink className="menu-item fw-bold p-2 ps-3" to="/home">
                     <i className="fa-solid fa-house me-3 icons"></i>
@@ -60,12 +61,12 @@ export default function Sidebar() {
 
                     {userDetailss && !loading && userDetailss.profileImg && (
                         <>
-                            <img
-                                src={`${API_BASE_URL}/files/${userDetailss.profileImg}`}
-                                height={'50vh'}
+                            {/* <img
+                                src={userDetailss.profileImg}
+                                height={'20vh'}
                                 className="profilepic"
                                 alt="Profile"
-                            />
+                            /> */}
                             <p className="fw-bold">@{userDetailss.fullName}</p>
                         </>
                     )}

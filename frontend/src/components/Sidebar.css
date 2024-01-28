@@ -1,6 +1,6 @@
 .sidebar-body {
     height: 100vh !important;
-    width: 32vh;
+    width: 10vw;
     padding: 20px;
     margin-left: 15%;
     position: fixed;
@@ -29,34 +29,34 @@
 @media (max-width: 900px) {
     .sidebar-body {
         height: 100vh !important;
-        width: 21vh;
+        width: 5vw;
         padding: 0px;
         margin-left: 4%;
         position: fixed;
     }
 }
 
-/* Media query for small screens (e.g., mobile)
-@media (max-width: 450px) {
+
+@media (max-width: 576px) {
     .sidebar-body {
         height: 100vh !important;
-        width: 19vh;
+        width: 5vw;
         padding: 0px;
         margin-left: 0%;
         position: fixed;
     }
 
-    .profile-section {
+    /* .profile-section {
         display: none !important;
     }
 
     .menu-item {
         font-size: small !important;
         display: none;
-    }
+    } */
     .icons {
         font-size: small !important;
         display: flex;
         flex-direction: row;
     }
-} */
+}

@@ -9,7 +9,7 @@
   
   @media (max-width: 900px) {
     .feed-body {
-      margin-left: 0; /* No margin on smaller screens */
+      margin-left: 13; /* No margin on smaller screens */
       width: 100%; /* Full width on smaller screens */
     }
   }
