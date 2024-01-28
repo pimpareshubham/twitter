@@ -28,15 +28,28 @@
     color: white;
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 568px) {
     .login-body {
         margin: 0;
         padding: 0;
         display: block;
+        height: max-content;
     }
     .login-card-body {
-        border-style: none !important;
+        border: none !important;
         width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        /* Add additional styles as needed */
     }
+    
+
   }
+
+  .my-3 {
+    margin-top: 0rem!important;
+    margin-bottom: 0!important;
+}
   
