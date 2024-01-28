@@ -28,7 +28,7 @@
     color: white;
 }
 
-@media only screen and (max-width: 568px) {
+@media only screen and (max-width: 576px) {
     .login-body {
         margin: 0;
         padding: 0;
