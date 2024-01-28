@@ -1,11 +1,7 @@
 FROM node:16-alpine
-
-WORKDIR /app
-
-COPY frontend/. .
-
-RUN npm install
-
+RUN mkdir node
+COPY . ./node
+WORKDIR /node
+RUN npm install 
 EXPOSE 3000
-
 CMD npm start
