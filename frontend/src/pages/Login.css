@@ -1,5 +1,5 @@
 .login-body {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,19 +30,20 @@
 
 @media only screen and (max-width: 568px) {
     .login-body {
-        margin: 0;
-        padding: 0;
-        display: block;
-        height: max-content;
+        height: min-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    
     .login-card-body {
         border: none !important;
         width: 100vw;
-        height: 100vh;
+        
         display: flex;
         justify-content: space-around;
         align-items: center;
-        /* Add additional styles as needed */
+    
     }
     
 
