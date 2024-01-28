@@ -1,5 +1,5 @@
 .signup-body {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,8 +19,8 @@
 }
 
 .signup-column-2 {
-    padding-top: 0%;
-    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 
 .signup-btn {
@@ -30,12 +30,27 @@
 
 @media only screen and (max-width: 568px) {
     .signup-body {
-        margin: 0;
-        padding: 0;
-        display: block;
+        height: min-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    
     .signup-card-body {
-        border-style: none !important;
+        border: none !important;
         width: 100vw;
+        
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
     }
+    
+
   }
+
+  .my-3 {
+    margin-top: 0rem!important;
+    margin-bottom: 0!important;
+}
+  
