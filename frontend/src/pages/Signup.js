@@ -46,7 +46,7 @@ export default function Signup() {
     
 
     return (
-        <div className='signup-body'>
+        <div className='container signup-body'>
             <div className="card my-3 shadow signup-card-body" >
                 <div className="row g-0">
                     <div className="col-md-4 signup-column-1 text-center">

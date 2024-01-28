@@ -51,7 +51,7 @@ export default function Login() {
     }
 
     return (
-        <div className="login-body">
+        <div className="container login-body">
             <div className="card my-3 shadow login-card-body">
                 <div className="row g-0">
                     <div className="col-md-4 login-column-1 text-center">

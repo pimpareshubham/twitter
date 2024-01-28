@@ -1,10 +1,12 @@
 .login-body {
-    margin-top: 12%;
-    margin-left: 20%;
-    margin-right: 20%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .login-card-body {
+    width: 60vw;
     border-style: none !important;
 }
 
@@ -25,3 +27,16 @@
     text-decoration: none;
     color: white;
 }
+
+@media only screen and (max-width: 568px) {
+    .login-body {
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+    .login-card-body {
+        border-style: none !important;
+        width: 100vw;
+    }
+  }
+  
